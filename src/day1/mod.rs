@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Lists {
     first: Vec<u32>,
     second: Vec<u32>,
@@ -20,7 +20,6 @@ pub fn input_generator(input: &str) -> Lists {
     };
 
     input.lines().for_each(|line| {
-        // INSERT PARSING CODE HERE
         let mut entries = line.split_whitespace().map(|x| x.parse().unwrap());
 
         lists.first.push(entries.next().unwrap());
@@ -52,7 +51,7 @@ pub fn part2(mut input: Lists) -> usize {
     input
         .first
         .iter()
-        .map(|&x| (x * *second_map.entry(x).or_default()) as usize)
+        .map(|&x| (x * *second_map.get(&x).unwrap_or(&0)) as usize)
         .sum()
 }
 

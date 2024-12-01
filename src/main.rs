@@ -47,10 +47,8 @@ macro_rules! run {
 
             println!("================= {} =================", stringify!($lib));
 
-            let part1 = $lib::part1(formatted_input);
+            let part1 = $lib::part1(formatted_input.clone());
             println!("Solution for {} Part 1 : {}", stringify!($lib), part1);
-
-            let formatted_input = $lib::input_generator(&raw_input);
 
             let part2 = $lib::part2(formatted_input);
             println!("Solution for {} Part 2: {}", stringify!($lib), part2);
@@ -64,10 +62,9 @@ macro_rules! run {
 
             println!("================= {} =================", stringify!($lib));
 
-            let part1 = $lib::part1(formatted_input);
+            let part1 = $lib::part1(formatted_input.clone());
             println!("Solution for {} Part 1 : {}", stringify!($lib), part1);
 
-            let formatted_input = $lib::input_generator(&raw_input);
 
             let part2 = $lib::part2(formatted_input);
             println!("Solution for {} Part 2: {}", stringify!($lib), part2);
