@@ -8,6 +8,11 @@ edition = "2021"
 [dependencies]
 simple_logger = "5.0.0"
 log = "0.4.20"
+criterion = "0.5.1"
+
+[[bench]]
+name = "aoc_benchmark"
+harness = false
 
 [[bin]]
 name = "run"

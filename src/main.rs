@@ -122,4 +122,5 @@ fn main() {
     SimpleLogger::new().init().unwrap();
 
     run!(day1);
+    run!(day2);
 }

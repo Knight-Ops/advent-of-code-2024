@@ -3,6 +3,7 @@ pub fn input_generator(input: &str) -> Vec<u32> {
         .lines()
         .map(|line| {
             // INSERT PARSING CODE HERE
+            unimplemented!()
         })
         .collect()
 }
