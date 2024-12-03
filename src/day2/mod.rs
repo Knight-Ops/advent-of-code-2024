@@ -85,6 +85,7 @@ pub fn part1(input: Vec<ReactorReport>) -> usize {
         .count()
 }
 
+// I am fairly certain that this doesn't cover all of the edge cases presented in the word problem.
 pub fn part2(input: Vec<ReactorReport>) -> usize {
     input
         .iter()

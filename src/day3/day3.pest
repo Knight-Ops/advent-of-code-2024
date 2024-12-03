@@ -1,0 +1,6 @@
+condition_identifier = { "don't" | "do" }
+operation_identifier = {"mul"}
+value = { ASCII_DIGIT{1, 3} }
+operation = { operation_identifier ~ "(" ~ WHITE_SPACE* ~ value ~ WHITE_SPACE* ~ "," ~ WHITE_SPACE* ~ value ~ WHITE_SPACE* ~ ")" }
+
+program = {SOI ~ (operation | condition_identifier | ASCII)* ~ EOI}

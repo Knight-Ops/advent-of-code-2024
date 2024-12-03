@@ -8,11 +8,11 @@ pub fn input_generator(input: &str) -> Vec<u32> {
         .collect()
 }
 
-pub fn part1(input: &[u32]) -> usize {
+pub fn part1(input: Vec<u32>) -> usize {
     unimplemented!()
 }
 
-pub fn part2(input: &[u32]) -> usize {
+pub fn part2(input: Vec<u32>) -> usize {
     unimplemented!()
 }
 
@@ -33,36 +33,18 @@ mod tests {
                 assert_eq!(super::$func(input), $val);
             }
         };
-    }
-
-    // macro_rules! test {
-    //     ($func:ident, $val:expr) => {
-    //         #[test]
-    //         fn $func() {
-    //             let name = module_path!().split("::").collect::<Vec<&str>>();
-    //             let i = read_input_file(&format!(
-    //                 "input/2024/{}_test.txt",
-    //                 name[name.len() - 2].trim()
-    //             ));
-
-    //             let input = super::input_generator(&i);
-    //             assert_eq!(super::$func(&input), $val);
-    //         }
-    //     };
-    // }
-
-    macro_rules! test_mut {
-        ($func:ident, $val:expr) => {
+        ($func:ident, $val:expr, $f:expr) => {
             #[test]
             fn $func() {
                 let name = module_path!().split("::").collect::<Vec<&str>>();
                 let i = read_input_file(&format!(
-                    "input/2024/{}_test.txt",
-                    name[name.len() - 2].trim()
+                    "input/2024/{}_{}.txt",
+                    name[name.len() - 2].trim(),
+                    $f
                 ));
 
-                let mut input = super::input_generator(&i);
-                assert_eq!(super::$func(&mut input), $val);
+                let input = super::input_generator(&i);
+                assert_eq!(super::$func(input), $val);
             }
         };
     }
