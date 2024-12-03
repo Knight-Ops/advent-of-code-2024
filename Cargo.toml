@@ -11,6 +11,7 @@ log = "0.4.20"
 criterion = "0.5.1"
 pest = "2.7.14"
 pest_derive = "2.7.14"
+regex = "1.11.1"
 
 [[bench]]
 name = "aoc_benchmark"

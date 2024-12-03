@@ -1,5 +1,6 @@
 use pest::Parser;
 use pest_derive::Parser;
+use regex::Regex;
 
 #[derive(Parser)]
 #[grammar = "day3/day3.pest"]
@@ -46,6 +47,21 @@ pub fn part1(input: &str) -> usize {
         .sum()
 }
 
+pub fn part1_regex(input: &str) -> usize {
+    let re = Regex::new(r"(mul)\((\d{1,3}),(\d{1,3})\)").unwrap();
+
+    re.captures_iter(input)
+        .map(|c| c.extract())
+        .map(|(_, [op, val1, val2])| {
+            if op == "mul" {
+                val1.parse::<usize>().unwrap() * val2.parse::<usize>().unwrap()
+            } else {
+                0
+            }
+        })
+        .sum()
+}
+
 pub fn part2(input: &str) -> usize {
     let mut multiply_active = true;
 
@@ -83,18 +99,54 @@ pub fn part2(input: &str) -> usize {
                     _ => unimplemented!(),
                 }
             }
-            Rule::condition_identifier => match pair.as_str() {
-                "do" => {
+            Rule::conditional => match pair.as_str() {
+                "do()" => {
                     multiply_active = true;
                     0
                 }
-                "don't" => {
+                "don't()" => {
                     multiply_active = false;
                     0
                 }
                 _ => unimplemented!(),
             },
             _ => 0,
+        })
+        .sum()
+}
+
+pub fn part2_regex(input: &str) -> usize {
+    let re = Regex::new(r"(mul\(\d{1,3},\d{1,3}\)|don't\(\)|do\(\))").unwrap();
+
+    let mut multiply_active = true;
+
+    re.captures_iter(input)
+        .map(|c| c.extract())
+        .map(|(_, [op])| match op.split("(").nth(0).unwrap() {
+            "mul" => {
+                if multiply_active {
+                    op.split("(")
+                        .nth(1)
+                        .unwrap()
+                        .split(")")
+                        .nth(0)
+                        .unwrap()
+                        .split(",")
+                        .map(|x| x.parse::<usize>().unwrap())
+                        .product()
+                } else {
+                    0
+                }
+            }
+            "do" => {
+                multiply_active = true;
+                0
+            }
+            "don't" => {
+                multiply_active = false;
+                0
+            }
+            _ => unreachable!(),
         })
         .sum()
 }
@@ -133,5 +185,7 @@ mod tests {
     }
 
     test!(part1, 161);
+    test!(part1_regex, 161);
     test!(part2, 48, "test2");
+    test!(part2_regex, 48, "test2");
 }

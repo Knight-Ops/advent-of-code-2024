@@ -26,7 +26,7 @@ macro_rules! bench_please {
 
 bench_please!(day1);
 bench_please!(day2);
-bench_please!(day3);
+bench_please!(day3, part1_regex, part2_regex);
 
 criterion_group!(all, day1, day2, day3);
 criterion_group!(single, day3);
