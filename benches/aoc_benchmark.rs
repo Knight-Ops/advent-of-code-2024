@@ -24,8 +24,8 @@ macro_rules! bench_please {
     }
 }
 
-bench_please!(day1, part1, part2);
-bench_please!(day2, part1, part2);
+bench_please!(day1);
+bench_please!(day2);
 
 criterion_group!(all, day1, day2);
 criterion_group!(single, day2);
